@@ -41,9 +41,9 @@ class App extends Component {
     ));
 
     return (
-      <div className="container pt-2">
+      <div className="container-fluid pt-2">
         <div className="row">
-          <div className="col-md-8 offset-md-2">
+          <div className="col-md-6 offset-md-3">
             <form onSubmit={this.handleSubmit}>
               <input
                 className="form-control"
@@ -55,6 +55,15 @@ class App extends Component {
             <ul className="list-group list-group-flush pt-2">{todos}</ul>
           </div>
         </div>
+        {this.props.todos.todos.length > 0 ? (
+          <div className="row">
+            <div className="col-md-6 offset-md-3">
+              <h4>We currently have {this.props.todos.todos.length} items</h4>
+            </div>
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
