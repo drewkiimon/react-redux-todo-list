@@ -32,7 +32,6 @@ export default function(state = { todos: [] }, action) {
         todos: state.todos.filter(item => item.text !== action.payload)
       };
     case DELETE_COMPLETED:
-      console.log("Completed");
       return {
         ...state,
         todos: state.todos.filter(item => !item.completed)

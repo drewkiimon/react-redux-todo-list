@@ -33,6 +33,6 @@ export function deleteTodo(id) {
 
 export function deleteCompleted() {
   return {
-    type: DELETE_TODO
+    type: DELETE_COMPLETED
   };
 }
