@@ -1,4 +1,10 @@
-import { ADD_TODO, FETCH_TODOS, UPDATE_TODO, DELETE_TODO } from "../actions";
+import {
+  ADD_TODO,
+  FETCH_TODOS,
+  UPDATE_TODO,
+  DELETE_TODO,
+  DELETE_COMPLETED
+} from "../actions";
 
 export default function(state = { todos: [] }, action) {
   switch (action.type) {
@@ -25,6 +31,11 @@ export default function(state = { todos: [] }, action) {
       return {
         ...state,
         todos: state.todos.filter(item => item.text !== action.payload)
+      };
+    case DELETE_COMPLETED:
+      return {
+        ...state,
+        todos: state.todos.filter(item => !item.completed)
       };
     default:
       return state;

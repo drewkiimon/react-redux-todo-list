@@ -11,6 +11,7 @@ ul {
   list-style-type: none;
 }
 
-.line-through {
+.line-through,
+.line-through:hover {
   text-decoration: line-through;
 }
