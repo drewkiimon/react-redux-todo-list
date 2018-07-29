@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { deleteTodo } from "../actions";
 import "./TodoItem.css";
 
 class TodoItem extends Component {
@@ -9,7 +11,7 @@ class TodoItem extends Component {
   }
 
   handleClick(event) {
-    console.log("From Todo", event.target);
+    this.props.deleteTodo(event.target.id);
   }
 
   render() {
@@ -17,7 +19,7 @@ class TodoItem extends Component {
       <li
         className="list-group-item d-flex align-items-center justify-content-center"
         id={this.props.todo}
-        onClick={this.props.callback}
+        onClick={this.handleClick}
       >
         {this.props.todo}
       </li>
@@ -25,4 +27,13 @@ class TodoItem extends Component {
   }
 }
 
-export default TodoItem;
+function mapStateToProps(state) {
+  return {
+    todos: state.todos
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { deleteTodo }
+)(TodoItem);

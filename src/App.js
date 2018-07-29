@@ -56,7 +56,9 @@ class App extends Component {
 }
 //
 function mapStateToProps(state) {
-  return { todos: state.todos };
+  return {
+    todos: state.todos
+  };
 }
 
 export default connect(
