@@ -16,7 +16,6 @@ export default function(state = { todos: [] }, action) {
     case FETCH_TODOS:
       return { ...state };
     case UPDATE_TODO:
-      console.log("Update called");
       return {
         ...state,
         todos: state.todos.map(todo => {
@@ -33,6 +32,7 @@ export default function(state = { todos: [] }, action) {
         todos: state.todos.filter(item => item.text !== action.payload)
       };
     case DELETE_COMPLETED:
+      console.log("Completed");
       return {
         ...state,
         todos: state.todos.filter(item => !item.completed)

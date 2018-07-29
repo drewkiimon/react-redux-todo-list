@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TodoItem from "./components/TodoItem";
+import Tracker from "./components/Tracker";
 import { connect } from "react-redux";
 import { fetchTodos, updateTodo, addTodo } from "./actions";
 
@@ -56,11 +57,7 @@ class App extends Component {
           </div>
         </div>
         {this.props.todos.todos.length > 0 ? (
-          <div className="row">
-            <div className="col-md-6 offset-md-3">
-              <h4>We currently have {this.props.todos.todos.length} items</h4>
-            </div>
-          </div>
+          <Tracker key="tracker" items={this.props.todos.todos.length} />
         ) : (
           <div />
         )}
