@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "version": "0.1.0",
-  "homepage": "http://www.andrewpagan.com/react-redux-todo-list",
+  "homepage": "http://www.andrewpagan.me/react-redux-todo-list",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.2.0",
