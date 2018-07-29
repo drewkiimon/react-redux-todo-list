@@ -1,6 +1,6 @@
 import { ADD_TODO, FETCH_TODOS, UPDATE_TODO, DELETE_TODO } from "../actions";
 
-export default function(state = {}, action) {
+export default function(state = { todos: [] }, action) {
   switch (action.type) {
     case ADD_TODO:
       return { ...state, todos: [...this.state.todos, action.payload] };

@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import TodoItem from "./components/TodoItem";
 import { connect } from "react-redux";
-import { fetchTodos, updateTodo, addTodo } from "../actions";
+import { fetchTodos, updateTodo, addTodo } from "./actions";
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      value: ""
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.callback = this.callback.bind(this);
+    // this.callback = this.callback.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("Mounting");
+    this.props.fetchTodos();
   }
 
   componentDidUpdate() {
@@ -17,28 +25,23 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.props.updateTodo(event.target.value);
-    // this.setState({ input: event.target.value });
+    // this.props.updateTodo(event.target.value);
+    this.setState({ input: event.target.value });
   }
-
-  // callback(event) {
-  //   let id = event.target.id;
-  //   this.setState({
-  //     todos: this.state.todos.filter(todo => id !== todo)
-  //   });
-  // }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addTodo(this.props.fetchTodos());
+    this.props.addTodo(this.state.value);
     // this.setState({ todos: [...this.state.todos, this.state.input] });
     // this.setState({ input: "" });
   }
 
   render() {
-    const todos = this.state.todos.map(todo => (
+    console.log("About to render");
+    const todos = this.props.todos.map(todo => (
       <TodoItem key={todo} todo={todo} callback={this.callback} />
     ));
+
     return (
       <div className="container pt-2">
         <div className="row">
@@ -51,14 +54,13 @@ class App extends Component {
                 placeholder="Enter todo item here..."
               />
             </form>
-            <ul className="list-group list-group-flush pt-2">{todos}</ul>
           </div>
         </div>
       </div>
     );
   }
 }
-
+//       <ul className="list-group list-group-flush pt-2">{todos}</ul>
 function mapStateToProps(state) {
   return { todos: state.todos };
 }
