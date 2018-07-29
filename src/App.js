@@ -16,7 +16,12 @@ class App extends Component {
     this.props.fetchTodos();
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps) {
+    // Will only console log if there is new props / state
+    if (this.props.todos !== prevProps.todos) {
+      console.log(this.props.todos);
+    }
+  }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -32,7 +37,7 @@ class App extends Component {
 
   render() {
     const todos = this.props.todos.todos.map(todo => (
-      <TodoItem key={todo} todo={todo} callback={this.callback} />
+      <TodoItem key={todo.text} todo={todo.text} />
     ));
 
     return (

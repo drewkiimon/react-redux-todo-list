@@ -3,7 +3,10 @@ import { ADD_TODO, FETCH_TODOS, UPDATE_TODO, DELETE_TODO } from "../actions";
 export default function(state = { todos: [] }, action) {
   switch (action.type) {
     case ADD_TODO:
-      return { ...state, todos: [...state.todos, action.payload] };
+      return {
+        ...state,
+        todos: [...state.todos, { text: action.payload, completed: false }]
+      };
     case FETCH_TODOS:
       return { ...state };
     case UPDATE_TODO:
@@ -11,7 +14,7 @@ export default function(state = { todos: [] }, action) {
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.todos.filter(item => item !== action.payload)
+        todos: state.todos.filter(item => item.text !== action.payload)
       };
     default:
       return state;
