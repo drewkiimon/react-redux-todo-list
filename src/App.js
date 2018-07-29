@@ -6,39 +6,32 @@ import { fetchTodos, updateTodo, addTodo } from "./actions";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ""
-    };
+    this.state = { value: "" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.callback = this.callback.bind(this);
   }
 
   componentDidMount() {
-    console.log("Mounting");
     this.props.fetchTodos();
   }
 
-  componentDidUpdate() {
-    // When we get new props / state, this will run
-  }
+  componentDidUpdate() {}
 
   handleChange(event) {
-    // this.props.updateTodo(event.target.value);
-    this.setState({ input: event.target.value });
+    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.addTodo(this.state.value);
     // this.setState({ todos: [...this.state.todos, this.state.input] });
-    // this.setState({ input: "" });
+    this.setState({ value: "" });
+    this.props.fetchTodos();
   }
 
   render() {
-    console.log("About to render");
-    const todos = this.props.todos.map(todo => (
+    const todos = this.props.todos.todos.map(todo => (
       <TodoItem key={todo} todo={todo} callback={this.callback} />
     ));
 
@@ -49,18 +42,19 @@ class App extends Component {
             <form onSubmit={this.handleSubmit}>
               <input
                 className="form-control"
-                value={this.state.input}
+                value={this.state.value}
                 onChange={this.handleChange}
                 placeholder="Enter todo item here..."
               />
             </form>
+            <ul className="list-group list-group-flush pt-2">{todos}</ul>
           </div>
         </div>
       </div>
     );
   }
 }
-//       <ul className="list-group list-group-flush pt-2">{todos}</ul>
+//
 function mapStateToProps(state) {
   return { todos: state.todos };
 }
