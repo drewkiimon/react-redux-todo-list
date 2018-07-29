@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import TodoItem from "./components/TodoItem";
+import { connect } from "react-redux";
+import { fetchTodos, updateTodo, addTodo } from "../actions";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      todos: [],
-      input: ""
-    };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.callback = this.callback.bind(this);
@@ -18,20 +17,22 @@ class App extends Component {
   }
 
   handleChange(event) {
-    this.setState({ input: event.target.value });
+    this.props.updateTodo(event.target.value);
+    // this.setState({ input: event.target.value });
   }
 
-  callback(event) {
-    let id = event.target.id;
-    this.setState({
-      todos: this.state.todos.filter(todo => id !== todo)
-    });
-  }
+  // callback(event) {
+  //   let id = event.target.id;
+  //   this.setState({
+  //     todos: this.state.todos.filter(todo => id !== todo)
+  //   });
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ todos: [...this.state.todos, this.state.input] });
-    this.setState({ input: "" });
+    this.props.addTodo(this.props.fetchTodos());
+    // this.setState({ todos: [...this.state.todos, this.state.input] });
+    // this.setState({ input: "" });
   }
 
   render() {
@@ -58,4 +59,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return { todos: state.todos };
+}
+
+export default connect(
+  mapStateToProps,
+  { fetchTodos, updateTodo, addTodo }
+)(App);
