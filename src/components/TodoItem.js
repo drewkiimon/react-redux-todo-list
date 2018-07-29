@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { deleteTodo } from "../actions";
+import { deleteTodo, updateTodo } from "../actions";
 import "./TodoItem.css";
 
 class TodoItem extends Component {
@@ -10,14 +10,20 @@ class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // When a user click, we will change it's completed to true
   handleClick(event) {
-    this.props.deleteTodo(event.target.id);
+    this.props.updateTodo(event.target.id);
+    // this.props.deleteTodo(event.target.id);
   }
 
   render() {
     return (
       <li
-        className="list-group-item d-flex align-items-center justify-content-center"
+        className={
+          this.props.completed
+            ? "line-through list-group-item d-flex align-items-center justify-content-center"
+            : "list-group-item d-flex align-items-center justify-content-center"
+        }
         id={this.props.todo}
         onClick={this.handleClick}
       >
@@ -35,5 +41,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { deleteTodo }
+  { deleteTodo, updateTodo }
 )(TodoItem);

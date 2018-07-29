@@ -37,7 +37,7 @@ class App extends Component {
 
   render() {
     const todos = this.props.todos.todos.map(todo => (
-      <TodoItem key={todo.text} todo={todo.text} />
+      <TodoItem key={todo.text} todo={todo.text} completed={todo.completed} />
     ));
 
     return (

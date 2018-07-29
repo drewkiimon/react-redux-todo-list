@@ -10,7 +10,17 @@ export default function(state = { todos: [] }, action) {
     case FETCH_TODOS:
       return { ...state };
     case UPDATE_TODO:
-      return { ...state, value: action.payload };
+      console.log("Update called");
+      return {
+        ...state,
+        todos: state.todos.map(todo => {
+          if (todo.text === action.payload) {
+            return { text: action.payload, completed: !todo.completed };
+          } else {
+            return todo;
+          }
+        })
+      };
     case DELETE_TODO:
       return {
         ...state,
