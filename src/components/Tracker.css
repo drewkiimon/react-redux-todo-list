@@ -1,0 +1,13 @@
+.tracker-box {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.text-wrapper {
+  word-wrap: break-word;
+  font-size: 0.75em;
+}
+
+.text-wrapper:hover {
+  cursor: pointer;
+}

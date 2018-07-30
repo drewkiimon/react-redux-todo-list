@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Tracker.css";
 import { connect } from "react-redux";
 import { deleteCompleted } from "../actions";
 
@@ -16,18 +17,19 @@ class Tracker extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md-6 offset-md-3 text-center">
-            <h4>We currently have {this.props.items} items</h4>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <button
-              className="btn btn-block btn-default"
-              onClick={this.handleClick}
-            >
-              Remove Completed Tasks
-            </button>
+          <div className="offset-md-3 col-md-6 tracker-box py-1">
+            <div className="row">
+              <div className="col-md-8 text-center d-flex justify-content-center align-items-center">
+                <span>
+                  We currently have <strong>{this.props.items}</strong> items
+                </span>
+              </div>
+              <div className="col-md-4  d-flex justify-content-center align-items-center">
+                <span className="text-wrapper" onClick={this.handleClick}>
+                  Remove Completed Tasks
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
